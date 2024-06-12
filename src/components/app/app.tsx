@@ -1,39 +1,32 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import './App.css'
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom'
 import Main from '../main/main'
 
 const App: FC = () => {
-  const [token, setToken] = useState<string>('')
   // const { pathRest } = useParams<{ pathRest: string }>()
-  const pathRest = 'admin'
+  const pathRest = 'portfoilo'
   const history = useHistory()
   if (
-    history.location.pathname !== '/admin' &&
-    history.location.pathname !== '/admin/autorization'
+    history.location.pathname !== '/portfoilo'
   ) {
     localStorage.setItem('initialRoute', history.location.pathname)
   }
-
-  useEffect(() => {
-    // @ts-expect-error
-    setToken(localStorage.getItem('token'))
-  }, [token])
 
   return (
     <div className='App'>
       <Switch>
         <Route path='/' exact={true}>
-          <Redirect to={{ pathname: `/${pathRest}/autorization` }} />
+          <Redirect to={{ pathname: `/${pathRest}/home` }} />
         </Route>
-        <Route path={`/${pathRest}/autorization`} exact={true}>
-          <Main token={token} pathRest={pathRest} setToken={setToken} />
+        <Route path={`/${pathRest}/home`} exact={true}>
+          <Main pathRest={pathRest} />
         </Route>
-        <Route path={'/admin'} exact>
-          <Redirect to={`/${pathRest}/autorization`} />
+        <Route path={'/portfoilo'} exact>
+          <Redirect to={`/${pathRest}/home`} />
         </Route>
         <Route path={'*'} exact>
-          <Redirect to={`/${pathRest}/autorization`} />
+          <Redirect to={`/${pathRest}/home`} />
         </Route>
       </Switch>
     </div>
