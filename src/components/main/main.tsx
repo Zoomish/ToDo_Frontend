@@ -22,10 +22,6 @@ import Home from '../../pages/home/home'
 import * as userApi from '../../utils/api/user-api'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import ChangeDark from '../change-dark-mode/change-dark-mode'
-import HeaderPhoto from '../../assets/images/header-bg.png'
-import Grass from '../../assets/images/realistic_banner_with_grass.png'
-import Losa from '../../assets/images/leaf212.png'
-import Up from '../../assets/images/up.png'
 import Projects from '../../pages/projects/projectss'
 import Skill from '../../pages/skills/skills'
 
@@ -141,27 +137,6 @@ const Main: FC<IMain> = ({ pathRest }) => {
               pathRest={pathRest}
               t={t}
             />
-            <div className='absolute flex flex-col justify-start items-end w-full h-full overflow-clip top-0 left-1'>
-              {!dark ? (
-                <>
-                  <img className='w-20' src={Losa}></img>
-                  <img className='w-20 absolute top-40' src={Losa}></img>
-                  {collapse ? (
-                    <>
-                      <img className='w-20 absolute top-80' src={Losa}></img>
-                      <img className='w-20 absolute top-96' src={Losa}></img>
-                      <img className='w-20 absolute bottom-20' src={Losa}></img>
-                    </>
-                  ) : (
-                    ''
-                  )}
-                  <img className='w-20 absolute bottom-40' src={Losa}></img>
-                  <img className='w-20 absolute bottom-0' src={Losa}></img>
-                </>
-              ) : (
-                ''
-              )}
-            </div>
           </Sider>
           <Layout
             className='relative'
@@ -181,20 +156,6 @@ const Main: FC<IMain> = ({ pathRest }) => {
                 justifyContent: 'space-between'
               }}
             >
-              <div className='absolute flex justify-center items-center w-full h-full -left-5 overflow-clip'>
-                {!dark ? (
-                  <>
-                    <img
-                      className='mb-40 w-[817px] max-w-screen-2xl h-60'
-                      src={Up}
-                    ></img>
-                    <img className='mb-40 w-[817px] h-60' src={Up}></img>
-                    <img className='mb-40 w-[817px] h-60' src={Up}></img>
-                  </>
-                ) : (
-                  ''
-                )}
-              </div>
               {!width
                 ? React.createElement(
                     collapse ? MenuUnfoldOutlined : MenuFoldOutlined,
@@ -286,39 +247,8 @@ const Main: FC<IMain> = ({ pathRest }) => {
                 className='w-12 h-12 flex justify-center'
                 style={{ right: 24 }}
               />
-              <div className='absolute flex justify-center items-center w-full h-full overflow-clip'>
-                {dark ? <img className='mb-40' src={HeaderPhoto}></img> : ''}
-              </div>
             </Content>
           </Layout>
-          <div className='absolute flex justify-end items-end overflow-clip bottom-0'>
-            {dark ? (
-              ''
-            ) : (
-              <>
-                <img
-                  src={Grass}
-                  className={'w-full max-w-screen-2xl max-h-40 min-h-20'}
-                />
-                <img
-                  src={Grass}
-                  className={'w-full max-w-screen-2xl max-h-40 min-h-20'}
-                />
-                <img
-                  src={Grass}
-                  className={'w-full max-w-screen-2xl max-h-40 min-h-20'}
-                />
-                <img
-                  src={Grass}
-                  className={'w-full max-w-screen-2xl max-h-40 min-h-20'}
-                />
-                <img
-                  src={Grass}
-                  className={'w-full max-w-screen-2xl max-h-40 min-h-20'}
-                />
-              </>
-            )}
-          </div>
         </Layout>
         <Footer style={{ ...color, paddingBottom: '2px' }}>
           <div className='border-t flex justify-center text-center'>
