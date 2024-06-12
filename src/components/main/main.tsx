@@ -1,41 +1,36 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import React, { useState, useEffect, FC, useContext } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { FloatButton, Layout } from 'antd'
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  RobotOutlined
-} from '@ant-design/icons'
+import { Layout } from 'antd'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import fullscreenIcon from '../../assets/images/fullscreen.svg'
-import { ECountry, TUser } from '../../utils/typesFromBackend'
+import Autorization from '../../pages/autorization/autorization'
+import { ECountry } from '../../utils/typesFromBackend'
 import NotFound from '../../pages/not-found/not-found'
 import { useTranslation } from 'react-i18next'
 import { NotificationProvider } from '../notification-provider/notification-provider'
 import i18n from '../i18n/i18n'
 import ChoiseLanguage from '../choise-language/choise-language'
+import ProtectedRoute from '../protected-route/protected-route'
 import Sidebar from '../sidebar/sidebar'
-import Project from '../../pages/project/project'
-import Contact from '../../pages/contact/contact'
-import Home from '../../pages/home/home'
-import * as userApi from '../../utils/api/user-api'
-import { NotificationContext } from '../../components/notification-provider/notification-provider'
-import ChangeDark from '../change-dark-mode/change-dark-mode'
-import Projects from '../../pages/projects/projectss'
-import Skill from '../../pages/skills/skills'
+import Users from '../../pages/users/users'
+import AddRestaurants from '../../pages/add-dish/add-dish'
+import Item from '../../pages/dish/dish'
+import Admins from '../../pages/categories/categories'
+import AddAdmin from '../../pages/add-category/add-category'
+import Admin from '../../pages/category/category'
 
-const { Header, Sider, Content, Footer } = Layout
+const { Header, Sider, Content } = Layout
 
 interface IMain {
+  token: string
   pathRest: string
+  setToken: (token: any) => void
 }
 
-const Main: FC<IMain> = ({ pathRest }) => {
-  const { openNotification } = useContext(NotificationContext)
-  const [user, setUser] = useState<TUser>()
-  const [dark, setDark] = useState<boolean>(false)
-  const [width, setWidth] = useState<boolean>(false)
+const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
+  // change to TRest
   const [language, setLanguage] = useState<ECountry>(
     (localStorage.getItem('language') as ECountry) ?? ECountry.RU
   )
@@ -49,60 +44,19 @@ const Main: FC<IMain> = ({ pathRest }) => {
   }
 
   React.useEffect(() => {
-    const savedUser = localStorage.getItem('user')
-    const deleteTime = localStorage.getItem('deleteTime')
-    if (savedUser && deleteTime && +new Date() - parseInt(deleteTime) < 0) {
-      setUser(JSON.parse(savedUser))
-    } else {
-      userApi
-        .getAllUsers()
-        .then((res: TUser) => {
-          setUser(res)
-          localStorage.setItem(
-            'deleteTime',
-            String(+new Date() + 3600 * 1000 * 24)
-          )
-          localStorage.setItem('user', JSON.stringify(res))
-        })
-        .catch((e) => openNotification(e, 'topRight'))
-    }
-  }, [])
-
-  const changeDark = (): void => {
-    setDark(!dark)
-    localStorage.setItem('dark', String(!dark))
-  }
-
-  React.useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     i18n.changeLanguage(language)
   }, [])
   const [collapse, setCollapse] = useState(false)
-  let flag = false
-  if (typeof window !== 'undefined') {
-    window.addEventListener('resize', function resizeHandler() {
-      if (window.innerWidth < 768 && !flag) {
-        setCollapse(true)
-        setWidth(true)
-        flag = true
-      } else if (window.innerWidth >= 768 && flag) {
-        setCollapse(false)
-        setWidth(false)
-        flag = false
-      }
-    })
-  }
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
   useEffect(() => {
-    setDark(localStorage.getItem('dark') === 'true')
-    window.innerWidth <= 768 ? setCollapse(true) : setCollapse(false)
-    window.innerWidth <= 768 ? setWidth(true) : setWidth(false)
+    window.innerWidth <= 760 ? setCollapse(true) : setCollapse(false)
   }, [])
 
   const handleToggle = (event: any): void => {
     event.preventDefault()
-    if (!width) {
-      collapse ? setCollapse(false) : setCollapse(true)
-    }
+    collapse ? setCollapse(false) : setCollapse(true)
   }
 
   function handleClickFullScreen(): void {
@@ -112,37 +66,24 @@ const Main: FC<IMain> = ({ pathRest }) => {
       void document.body.requestFullscreen()
     }
   }
-  const color = {
-    background: dark ? '#000' : '#fff',
-    color: dark ? '#fff' : '#000'
-  }
 
   return (
     <NotificationProvider>
       <Router>
-        <Layout className='relative'>
+        <Layout>
           <Sider
             trigger={null}
             collapsible
-            className='relative'
-            collapsedWidth='50'
             collapsed={collapse}
-            style={color}
-            width={'13rem'}
+            style={{ background: '#fff' }}
+            width={'17rem'}
           >
-            <Sidebar
-              dark={dark}
-              collapse={collapse}
-              style={color}
-              pathRest={pathRest}
-              t={t}
-            />
+            <Sidebar setIsLoggedIn={setIsLoggedIn} pathRest={pathRest} t={t} />
           </Sider>
           <Layout
-            className='relative'
             style={{
-              ...color,
-              paddingLeft: '10px',
+              background: '#fff',
+              paddingLeft: '30px',
               paddingRight: '30px'
             }}
           >
@@ -150,31 +91,23 @@ const Main: FC<IMain> = ({ pathRest }) => {
               className='siteLayoutBackground'
               style={{
                 padding: 0,
-                ...color,
+                background: '#fff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
               }}
             >
-              {!width
-                ? React.createElement(
-                    collapse ? MenuUnfoldOutlined : MenuFoldOutlined,
-                    {
-                      className: 'trigger z-10',
-                      onClick: handleToggle,
-                      style: color
-                    }
-                  )
-                : ''}
-              <ChoiseLanguage
-                dark={dark}
-                style={color}
-                t={t}
-                changeLanguage={changeLanguage}
-              />
-              <ChangeDark style={color} dark={dark} changeDark={changeDark} />
+              {React.createElement(
+                collapse ? MenuUnfoldOutlined : MenuFoldOutlined,
+                {
+                  className: 'trigger',
+                  onClick: handleToggle,
+                  style: { color: '#000' }
+                }
+              )}
+              <ChoiseLanguage t={t} changeLanguage={changeLanguage} />
               <div
-                className='fullscreen-btn z-10'
+                className='fullscreen-btn'
                 onClick={handleClickFullScreen}
                 title='На весь экран'
                 style={{ cursor: 'pointer' }}
@@ -183,79 +116,91 @@ const Main: FC<IMain> = ({ pathRest }) => {
               </div>
             </Header>
             <Content
-              className='flex flex-col relative mb-5'
               style={{
-                marginTop: 24,
-                padding: 0,
-                paddingBottom: 0,
-                minHeight: 'calc(100vh - 135px)',
-                ...color
+                margin: '24px 16px',
+                padding: 24,
+                minHeight: 'calc(100vh - 114px)',
+                background: '#fff'
               }}
             >
               <Switch>
-                <Route path={`/:${pathRest}/home`} exact>
-                  {user ? <Home t={t} user={user} /> : <></>}
+                <Route path={`/:${pathRest}/autorization`}>
+                  <Autorization
+                    setIsLoggedIn={setIsLoggedIn}
+                    t={t}
+                    setToken={setToken}
+                  />
                 </Route>
-                <Route path={`/:${pathRest}/projects`} exact>
-                  {user?.projects ? (
-                    <Projects
-                      dark={dark}
-                      pathRest={pathRest}
-                      t={t}
-                      language={language}
-                      projects={user.projects}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </Route>
-                <Route path={`/:${pathRest}/projects/:projectId`} exact>
-                  {user?.projects ? (
-                    <Project t={t} projects={user?.projects} />
-                  ) : (
-                    <></>
-                  )}
-                </Route>
-                <Route path={`/:${pathRest}/contact`} exact>
-                  {user ? (
-                    <Contact
-                      pathRest={pathRest}
-                      user={user}
-                      t={t}
-                      language={language}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </Route>
-                <Route path={`/:${pathRest}/skills`} exact>
-                  {user?.skills ? (
-                    <Skill skills={user.skills} t={t} language={language} />
-                  ) : (
-                    <></>
-                  )}
-                </Route>
+                <ProtectedRoute
+                  path={`/:${pathRest}/categories`}
+                  exact
+                  isLoggedIn={isLoggedIn}
+                  pathRest={pathRest}
+                >
+                  <Admins
+                    token={token}
+                    pathRest={pathRest}
+                    t={t}
+                    language={language}
+                  />
+                </ProtectedRoute>
+                <ProtectedRoute
+                  path={`/:${pathRest}/category/:categoryId`}
+                  exact
+                  isLoggedIn={isLoggedIn}
+                  pathRest={pathRest}
+                >
+                  <Admin token={token} pathRest={pathRest} t={t} />
+                </ProtectedRoute>
+                <ProtectedRoute
+                  path={`/:${pathRest}/add/category`}
+                  exact
+                  isLoggedIn={isLoggedIn}
+                  pathRest={pathRest}
+                >
+                  <AddAdmin token={token} pathRest={pathRest} t={t} />
+                </ProtectedRoute>
+                <ProtectedRoute
+                  path={`/:${pathRest}/dishes`}
+                  exact
+                  isLoggedIn={isLoggedIn}
+                  pathRest={pathRest}
+                >
+                  <Users
+                    token={token}
+                    pathRest={pathRest}
+                    t={t}
+                    language={language}
+                  />
+                </ProtectedRoute>
+                <ProtectedRoute
+                  path={`/:${pathRest}/dish/:dishId`}
+                  exact
+                  isLoggedIn={isLoggedIn}
+                  pathRest={pathRest}
+                >
+                  <Item
+                    token={token}
+                    pathRest={pathRest}
+                    t={t}
+                    language={language}
+                  />
+                </ProtectedRoute>
+                <ProtectedRoute
+                  path={`/:${pathRest}/add/dish`}
+                  exact
+                  isLoggedIn={isLoggedIn}
+                  pathRest={pathRest}
+                >
+                  <AddRestaurants token={token} pathRest={pathRest} t={t} />
+                </ProtectedRoute>
                 <Route path='*'>
                   <NotFound t={t} />
                 </Route>
               </Switch>
-              <FloatButton
-                icon={<RobotOutlined />}
-                href={`https://t.me/${user ? user?.tg_bot : ''}`}
-                target='_blank'
-                type='primary'
-                className='w-12 h-12 flex justify-center'
-                style={{ right: 24 }}
-              />
             </Content>
           </Layout>
         </Layout>
-        <Footer style={{ ...color, paddingBottom: '2px' }}>
-          <div className='border-t flex justify-center text-center'>
-            Copyright &copy; {new Date().getFullYear()} Zoomish. All rights
-            reserved.
-          </div>
-        </Footer>
       </Router>
     </NotificationProvider>
   )
