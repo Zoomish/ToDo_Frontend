@@ -1,71 +1,68 @@
-import { FC } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import { Menu } from 'antd'
 import {
-  UserOutlined,
-  ContactsOutlined,
-  DatabaseOutlined,
-  RadarChartOutlined
+  InfoCircleOutlined,
+  LogoutOutlined,
+  ContainerOutlined,
+  GroupOutlined,
+  VerticalAlignTopOutlined
 } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 
 interface ISidebar {
   pathRest: string
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>
   t: (arg0: string) => string
-  style: any
-  collapse: boolean
-  dark: boolean
 }
-const Sidebar: FC<ISidebar> = ({ dark, collapse, style, pathRest, t }) => {
+const Sidebar: FC<ISidebar> = ({ setIsLoggedIn, pathRest, t }) => {
   const history = useHistory()
-  const handleHomeClick = (): void => {
-    history.push(`/${pathRest}/home`)
+  const handleDishesClick = (): void => {
+    history.push(`/${pathRest}/dishes`)
   }
-  const handleProjectsClick = (): void => {
-    history.push(`/${pathRest}/projects`)
+  const handleCategoriesClick = (): void => {
+    history.push(`/${pathRest}/categories`)
   }
-  const handleAdminsClick = (): void => {
-    history.push(`/${pathRest}/contact`)
+  const handleInstructionClick = (): void => {
+    history.push(`/${pathRest}/blog`)
   }
-  const handleSkillsClick = (): void => {
-    history.push(`/${pathRest}/skills`)
+  const handleRestClick = (): void => {
+    history.push(`/${pathRest}/dishes`)
+  }
+
+  const handleLogout = (): void => {
+    localStorage.removeItem('token')
+    setIsLoggedIn(false)
+    history.push(`/${pathRest}/autorization`)
   }
 
   return (
     <>
-      <div
-        className='h-8 m-4 text-xl text-center relative z-10 rounded'
-        style={style}
-      >
-        {!collapse ? (
-          <p>
-            Zoomish <span className='font-medium'>Portfolio</span>
-          </p>
-        ) : (
-          <span className='font-medium'>Z</span>
-        )}
-      </div>
+      <div style={{ height: '32px', margin: '16px' }}></div>
       <Menu
         theme='light'
         mode='inline'
-        style={dark ? style : {}}
-        className='relative z-10 text-left bg-transparent'
+        style={{ textAlign: 'left' }}
         defaultSelectedKeys={['1']}
       >
-        <Menu.Item key='1' onClick={handleHomeClick}>
-          <UserOutlined />
-          <span>{t('main')}</span>
+        <Menu.Item key='1' onClick={handleDishesClick}>
+          <ContainerOutlined />
+          <span>{t('dishes')}</span>
         </Menu.Item>
-        <Menu.Item key='2' onClick={handleProjectsClick}>
-          <DatabaseOutlined />
-          <span>{t('projects')}</span>
+        <Menu.Item key='2' onClick={handleCategoriesClick}>
+          <GroupOutlined />
+          <span>{t('categories')}</span>
         </Menu.Item>
-        <Menu.Item key='43' onClick={handleSkillsClick}>
-          <RadarChartOutlined />
-          <span>{t('skills')}</span>
+        <Menu.Item key='3' onClick={handleInstructionClick}>
+          <InfoCircleOutlined />
+          <span>{t('manual')}</span>
         </Menu.Item>
-        <Menu.Item key='4' onClick={handleAdminsClick}>
-          <ContactsOutlined />
-          <span>{t('contacts')}</span>
+        <Menu.Item key='4' onClick={handleRestClick}>
+          <VerticalAlignTopOutlined />
+          <span> {t('back-menu')}</span>
+        </Menu.Item>
+        <Menu.Item key='5' onClick={handleLogout}>
+          <LogoutOutlined />
+          <span>{t('quit')}</span>
         </Menu.Item>
       </Menu>
     </>
