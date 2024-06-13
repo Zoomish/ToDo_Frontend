@@ -24,7 +24,7 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
   const { openNotification } = useContext(NotificationContext)
 
   const [data, setData] = React.useState<TDish[]>([])
-  const [nameTariffs, setnameTariffs] = React.useState<InameTariffs[]>([])
+  const [, setnameTariffs] = React.useState<InameTariffs[]>([])
   const location = useLocation()
 
   React.useEffect(() => {
@@ -93,7 +93,7 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
         }
         return 0
       }
-    },
+    }
   // {
   //  title: `${t('price')}`,
   //  dataIndex: 'price',
