@@ -20,6 +20,7 @@ import Item from '../../pages/dish/dish'
 import Admins from '../../pages/categories/categories'
 import AddAdmin from '../../pages/add-category/add-category'
 import Admin from '../../pages/category/category'
+import Dark from '../dark/dark'
 
 const { Header, Sider, Content } = Layout
 
@@ -33,6 +34,9 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   // change to TRest
   const [language, setLanguage] = useState<ECountry>(
     (localStorage.getItem('language') as ECountry) ?? ECountry.RU
+  )
+  const [dark, setDark] = useState<Boolean>(
+    Boolean(localStorage.getItem('dark')) ?? false
   )
   const { t } = useTranslation()
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
@@ -105,6 +109,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
                   style: { color: '#000' }
                 }
               )}
+              <Dark dark={dark} setDark={setDark} />
               <ChoiseLanguage t={t} changeLanguage={changeLanguage} />
               <div
                 className='fullscreen-btn'
