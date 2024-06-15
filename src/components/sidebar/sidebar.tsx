@@ -10,11 +10,19 @@ import {
 import { useHistory } from 'react-router'
 
 interface ISidebar {
+  collapse: boolean
+  style: Object
   pathRest: string
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>
   t: (arg0: string) => string
 }
-const Sidebar: FC<ISidebar> = ({ setIsLoggedIn, pathRest, t }) => {
+const Sidebar: FC<ISidebar> = ({
+  collapse,
+  style,
+  setIsLoggedIn,
+  pathRest,
+  t
+}) => {
   const history = useHistory()
   const handleDishesClick = (): void => {
     history.push(`/${pathRest}/dishes`)
@@ -37,11 +45,22 @@ const Sidebar: FC<ISidebar> = ({ setIsLoggedIn, pathRest, t }) => {
 
   return (
     <>
-      <div style={{ height: '32px', margin: '16px' }}></div>
+      <div
+        className='h-8 m-4 text-xl text-center relative z-10 rounded'
+        style={style}
+      >
+        {!collapse ? (
+          <p>
+            Zoomish <span className='font-medium'>Portfolio</span>
+          </p>
+        ) : (
+          <span className='font-medium'>Z</span>
+        )}
+      </div>
       <Menu
         theme='light'
         mode='inline'
-        style={{ textAlign: 'left' }}
+        style={{ textAlign: 'left', ...style }}
         defaultSelectedKeys={['1']}
       >
         <Menu.Item key='1' onClick={handleDishesClick}>

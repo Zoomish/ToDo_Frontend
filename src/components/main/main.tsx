@@ -87,7 +87,13 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
             style={style}
             width={'17rem'}
           >
-            <Sidebar setIsLoggedIn={setIsLoggedIn} pathRest={pathRest} t={t} />
+            <Sidebar
+              style={style}
+              collapse={collapse}
+              setIsLoggedIn={setIsLoggedIn}
+              pathRest={pathRest}
+              t={t}
+            />
           </Sider>
           <Layout
             style={{
