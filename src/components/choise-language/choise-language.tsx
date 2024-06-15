@@ -38,10 +38,7 @@ const ChoiseLanguage: FC<IChangeLanguage> = ({ t, changeLanguage }) => {
           onChange={(e) => onFinish(e)}
         >
           {restData.map((country) => (
-            <Select.Option
-              key={country}
-              value={country}
-            >
+            <Select.Option key={country} value={country}>
               {country}
             </Select.Option>
           ))}
