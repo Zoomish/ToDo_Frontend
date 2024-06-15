@@ -121,7 +121,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
                   style: style
                 }
               )}
-              <Dark dark={dark} setDark={setDark} />
+              <Dark dark={dark} style={style} setDark={setDark} />
               <ChoiseLanguage t={t} changeLanguage={changeLanguage} />
               <div
                 className='fullscreen-btn'
