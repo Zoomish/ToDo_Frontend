@@ -90,7 +90,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
     >
       <Form.Item
         label={t('login')}
-        name='private_nickname'
+        name='email'
         rules={[{ required: true, message: t('enter-your-username') }]}
       >
         <Input />
