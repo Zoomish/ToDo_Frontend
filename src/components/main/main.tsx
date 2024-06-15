@@ -20,6 +20,8 @@ import Item from '../../pages/dish/dish'
 import Admins from '../../pages/categories/categories'
 import AddAdmin from '../../pages/add-category/add-category'
 import Admin from '../../pages/category/category'
+import Dark from '../dark/dark'
+import { Footer } from 'antd/es/layout/layout'
 
 const { Header, Sider, Content } = Layout
 
@@ -34,6 +36,9 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   const [language, setLanguage] = useState<ECountry>(
     (localStorage.getItem('language') as ECountry) ?? ECountry.RU
   )
+  const [dark, setDark] = useState<boolean>(
+    localStorage.getItem('dark') === 'true' ?? false
+  )
   const { t } = useTranslation()
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
   const changeLanguage = (lng: ECountry) => {
@@ -41,6 +46,10 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
     i18n.changeLanguage(lng)
     setLanguage(lng)
     localStorage.removeItem('formData')
+  }
+  const style = {
+    background: dark ? '#000' : '#fff',
+    color: dark ? '#fff' : '#000'
   }
 
   React.useEffect(() => {
@@ -56,7 +65,8 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
 
   const handleToggle = (event: any): void => {
     event.preventDefault()
-    collapse ? setCollapse(false) : setCollapse(true)
+    setCollapse(!collapse)
+    localStorage.setItem('collapse', JSON.stringify(collapse))
   }
 
   function handleClickFullScreen(): void {
@@ -70,19 +80,25 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   return (
     <NotificationProvider>
       <Router>
-        <Layout>
+        <Layout style={style}>
           <Sider
             trigger={null}
             collapsible
             collapsed={collapse}
-            style={{ background: '#fff' }}
+            style={style}
             width={'17rem'}
           >
-            <Sidebar setIsLoggedIn={setIsLoggedIn} pathRest={pathRest} t={t} />
+            <Sidebar
+              style={style}
+              collapse={collapse}
+              setIsLoggedIn={setIsLoggedIn}
+              pathRest={pathRest}
+              t={t}
+            />
           </Sider>
           <Layout
             style={{
-              background: '#fff',
+              ...style,
               paddingLeft: '30px',
               paddingRight: '30px'
             }}
@@ -90,8 +106,8 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
             <Header
               className='siteLayoutBackground'
               style={{
+                ...style,
                 padding: 0,
-                background: '#fff',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between'
@@ -102,25 +118,26 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
                 {
                   className: 'trigger',
                   onClick: handleToggle,
-                  style: { color: '#000' }
+                  style: style
                 }
               )}
-              <ChoiseLanguage t={t} changeLanguage={changeLanguage} />
+              <Dark dark={dark} style={style} setDark={setDark} />
+              <ChoiseLanguage style={style} t={t} changeLanguage={changeLanguage} />
               <div
                 className='fullscreen-btn'
                 onClick={handleClickFullScreen}
                 title='На весь экран'
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: 'pointer', ...style }}
               >
                 <img src={fullscreenIcon} alt='На весь экран' />
               </div>
             </Header>
             <Content
               style={{
+                ...style,
                 margin: '24px 16px',
                 padding: 24,
-                minHeight: 'calc(100vh - 114px)',
-                background: '#fff'
+                minHeight: 'calc(100vh - 114px)'
               }}
             >
               <Switch>
@@ -201,6 +218,12 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
             </Content>
           </Layout>
         </Layout>
+        <Footer style={style}>
+          <div className='border-t flex justify-center text-center'>
+            Copyright &copy; {new Date().getFullYear()} Zoomish. All rights
+            reserved.
+          </div>
+        </Footer>
       </Router>
     </NotificationProvider>
   )
