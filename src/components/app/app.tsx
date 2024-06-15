@@ -5,7 +5,6 @@ import Main from '../main/main'
 
 const App: FC = () => {
   const [token, setToken] = useState<string>('')
-  // const { pathRest } = useParams<{ pathRest: string }>()
   const pathRest = 'admin'
   const history = useHistory()
   if (
