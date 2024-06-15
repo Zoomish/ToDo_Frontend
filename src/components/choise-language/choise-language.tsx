@@ -1,14 +1,12 @@
 import React, { FC } from 'react'
 import { ECountry } from '../../utils/typesFromBackend'
+import { Select } from 'antd'
 
 interface IChangeLanguage {
   t: (arg0: string) => string
   changeLanguage: (lng: ECountry) => void
 }
-const ChoiseLanguage: FC<IChangeLanguage> = ({
-  t,
-  changeLanguage
-}) => {
+const ChoiseLanguage: FC<IChangeLanguage> = ({ t, changeLanguage }) => {
   const [selectedOption, setSelectedOption] = React.useState('')
   const restData = Object.keys(ECountry)
   React.useEffect(() => {
@@ -29,28 +27,28 @@ const ChoiseLanguage: FC<IChangeLanguage> = ({
     localStorage.setItem('language', values)
     localStorage.removeItem('formDataDish')
   }
+  console.log(restData)
 
   return (
     <>
-      {restData && Array.isArray(restData)
-        ? (
-        <>
-          <select
-            id='my-select'
-            value={selectedOption}
-            onChange={(e) => onFinish(e.target.value)}
-          >
-            {restData.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-        </>
-          )
-        : (
-            ''
-          )}
+      {restData ? (
+        <Select
+          id='my-select'
+          value={selectedOption || restData[0]}
+          onChange={(e) => onFinish(e)}
+        >
+          {restData.map((country) => (
+            <Select.Option
+              key={country}
+              value={country}
+            >
+              {country}
+            </Select.Option>
+          ))}
+        </Select>
+      ) : (
+        ''
+      )}
     </>
   )
 }
