@@ -65,7 +65,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
 
   const handleToggle = (event: any): void => {
     event.preventDefault()
-    collapse ? setCollapse(false) : setCollapse(true)
+    setCollapse(!collapse)
   }
 
   function handleClickFullScreen(): void {
