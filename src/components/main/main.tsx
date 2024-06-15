@@ -35,8 +35,8 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   const [language, setLanguage] = useState<ECountry>(
     (localStorage.getItem('language') as ECountry) ?? ECountry.RU
   )
-  const [dark, setDark] = useState<Boolean>(
-    Boolean(localStorage.getItem('dark')) ?? false
+  const [dark, setDark] = useState<boolean>(
+    localStorage.getItem('dark') === 'true' ?? false
   )
   const { t } = useTranslation()
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars

@@ -3,10 +3,13 @@ import { Button } from 'antd'
 import React, { FC } from 'react'
 
 interface IDark {
-  dark: Boolean
-  setDark: (lng: Boolean) => void
+  dark: boolean
+  setDark: (lng: boolean) => void
 }
 const Dark: FC<IDark> = ({ setDark, dark }) => {
+  React.useEffect(() => {
+    localStorage.setItem('dark', JSON.stringify(dark))
+  }, [dark])
   return (
     <>
       <Button
