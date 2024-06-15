@@ -27,8 +27,6 @@ const ChoiseLanguage: FC<IChangeLanguage> = ({ t, changeLanguage }) => {
     localStorage.setItem('language', values)
     localStorage.removeItem('formDataDish')
   }
-  console.log(restData)
-
   return (
     <>
       {restData ? (
