@@ -1,3 +1,5 @@
+import { MoonOutlined, SunFilled } from '@ant-design/icons'
+import { Button } from 'antd'
 import React, { FC } from 'react'
 
 interface IDark {
@@ -7,6 +9,11 @@ interface IDark {
 const Dark: FC<IDark> = ({ setDark, dark }) => {
   return (
     <>
+      <Button
+        className='flex justify-center items-center'
+        icon={!dark ? <MoonOutlined /> : <SunFilled />}
+        onClick={() => setDark(!dark)}
+      />
     </>
   )
 }
