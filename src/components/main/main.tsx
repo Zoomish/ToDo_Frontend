@@ -123,6 +123,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
               )}
               <Dark dark={dark} style={style} setDark={setDark} />
               <ChoiseLanguage
+                dark={dark}
                 style={style}
                 t={t}
                 changeLanguage={changeLanguage}
