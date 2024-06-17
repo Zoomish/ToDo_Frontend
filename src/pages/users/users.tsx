@@ -83,9 +83,7 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
       dataIndex: 'category.title',
       key: 'category.title',
       render: (roles, user) => (
-        <Link to={`/${pathRest}/category/:${user.id}`}>
-          {user.id}
-        </Link>
+        <Link to={`/${pathRest}/category/:${user.id}`}>{user.id}</Link>
       ),
       sorter: (a, b) => {
         if (a.id !== undefined && b.id !== undefined) {
@@ -94,16 +92,16 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
         return 0
       }
     }
-  // {
-  //  title: `${t('price')}`,
-  //  dataIndex: 'price',
-  //  key: 'price',
-  //  render: (price) => <p>{price}</p>,
-  //  sorter: (a, b) => a.price - b.price,
-  //  filters: [...nameTariffs],
-  //  onFilter: (value: string | number | boolean, record) =>
-  //    record.price === value
-  // }
+    // {
+    //  title: `${t('price')}`,
+    //  dataIndex: 'price',
+    //  key: 'price',
+    //  render: (price) => <p>{price}</p>,
+    //  sorter: (a, b) => a.price - b.price,
+    //  filters: [...nameTariffs],
+    //  onFilter: (value: string | number | boolean, record) =>
+    //    record.price === value
+    // }
   ]
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>

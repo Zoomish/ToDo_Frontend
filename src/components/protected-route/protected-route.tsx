@@ -8,17 +8,24 @@ interface IProtectedRoute {
   isLoggedIn: boolean
   pathRest: string
 }
-const ProtectedRoute: FC<IProtectedRoute> = ({ isLoggedIn, children, pathRest }) => {
+const ProtectedRoute: FC<IProtectedRoute> = ({
+  isLoggedIn,
+  children,
+  pathRest
+}) => {
   return (
     <Route
       render={({ location }) =>
-        isLoggedIn
-          ? (
-              children
-            )
-          : (
-            <Redirect to={{ pathname: `/${pathRest}/autorization`, state: { from: location } }} />
-            )
+        isLoggedIn ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: `/${pathRest}/autorization`,
+              state: { from: location }
+            }}
+          />
+        )
       }
     />
   )
