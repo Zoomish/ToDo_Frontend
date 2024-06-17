@@ -5,7 +5,7 @@ import { ECountry, TDish } from '../../utils/typesFromBackend'
 import * as userAPI from '../../utils/api/user-api'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import imageNoPhoto from '../../assets/images/no_photo.png'
-import { BASE_URL_CDN } from '../../utils/const'
+import { BASE_URL } from '../../utils/const'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 
 interface InameTariffs {
@@ -56,7 +56,7 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
       key: 'image',
       render: (image: string) => (
         <img
-          src={`${BASE_URL_CDN}/${image}`}
+          src={`${BASE_URL}/${image}`}
           style={{ width: '100px', height: '100px', objectFit: 'contain' }}
           onError={(e) => {
             e.currentTarget.src = imageNoPhoto
