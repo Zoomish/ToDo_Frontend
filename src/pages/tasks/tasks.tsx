@@ -2,7 +2,7 @@ import { Table } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React, { FC, useContext } from 'react'
 import { ECountry, TDish } from '../../utils/typesFromBackend'
-import * as userAPI from '../../utils/api/user-api'
+import * as userAPI from '../../utils/api/task-api'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import imageNoPhoto from '../../assets/images/no_photo.png'
 import { BASE_URL } from '../../utils/const'
@@ -29,7 +29,7 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
 
   React.useEffect(() => {
     userAPI
-      .getUsers(token)
+      .getTasks(token)
       .then((res) => {
         setData(res)
         const objectNames: { [key: string]: boolean } = {}

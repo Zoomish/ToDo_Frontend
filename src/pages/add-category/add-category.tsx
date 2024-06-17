@@ -4,7 +4,7 @@ import { ELevelAccess, TAdmin, TRest } from '../../utils/typesFromBackend'
 import { Form, Input, Button, Select, Modal } from 'antd'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import * as adminAPI from '../../utils/api/category-api'
-import * as userAPI from '../../utils/api/user-api'
+import * as userAPI from '../../utils/api/task-api'
 
 interface IAddAdmin {
   pathRest: string
@@ -38,7 +38,7 @@ const AddAdmin: FC<IAddAdmin> = ({ token, pathRest, t }) => {
   }
   React.useEffect(() => {
     userAPI
-      .getUsers(token)
+      .getTasks(token)
       .then((res) => {
         const nameRests: { [key: string]: string } = {}
         res.rests.forEach((rest: TRest) => {

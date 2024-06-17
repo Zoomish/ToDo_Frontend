@@ -3,8 +3,8 @@
 import { BASE_URL } from '../const'
 import { handleResponse } from '../helpers'
 
-export const getUsers = async (token: string) => {
-  return await fetch(`${BASE_URL}/users`, {
+export const getTasks = async (token: string) => {
+  return await fetch(`${BASE_URL}/task`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
