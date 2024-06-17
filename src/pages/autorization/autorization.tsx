@@ -52,7 +52,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
         })
     }
   }, [])
-
+  console.log(window.location.host)
   const onFinish = (values: any) => {
     autorizationApi
       .autorization(values)
@@ -64,7 +64,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
           history.push(storedInitialRoute)
           localStorage.removeItem('initialRoute')
         } else {
-          history.push('dishes')
+          history.push(`${window.location.host}/dishes`)
         }
       })
       .catch((e) => openNotification(e, 'topRight'))
