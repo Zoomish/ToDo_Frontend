@@ -52,7 +52,6 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
         })
     }
   }, [])
-  console.log(window.location.host)
   const onFinish = (values: any) => {
     autorizationApi
       .autorization(values)
