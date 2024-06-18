@@ -28,7 +28,7 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
   const location = useLocation()
   React.useEffect(() => {
     userAPI
-      .getTasks(token)
+      .getTasks(token, +JSON.parse(atob(token.split('.')[1])).id)
       .then((res) => {
         setData(res)
         const objectNames: { [key: string]: boolean } = {}

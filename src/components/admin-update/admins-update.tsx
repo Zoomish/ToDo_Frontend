@@ -41,7 +41,7 @@ const AdminPassword: FC<IGroupModifiersForDish> = ({ token, pathRest, t }) => {
 
   React.useEffect(() => {
     userAPI
-      .getTasks(token)
+      .getTasks(token, 1)
       .then((res) => {
         const nameRests: { [key: string]: string } = {}
         res.rests.forEach((rest: TRest) => {
