@@ -27,6 +27,8 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
   const [, setnameTariffs] = React.useState<InameTariffs[]>([])
   const location = useLocation()
 
+  console.log(JSON.parse(atob(token.split('.')[1])))
+
   React.useEffect(() => {
     userAPI
       .getTasks(token)

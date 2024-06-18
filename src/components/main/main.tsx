@@ -6,7 +6,7 @@ import { Layout } from 'antd'
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
 import fullscreenIcon from '../../assets/images/fullscreen.svg'
 import Autorization from '../../pages/autorization/autorization'
-import { ECountry } from '../../utils/typesFromBackend'
+import { ECountry, TUser } from '../../utils/typesFromBackend'
 import NotFound from '../../pages/not-found/not-found'
 import { useTranslation } from 'react-i18next'
 import { NotificationProvider } from '../notification-provider/notification-provider'
@@ -57,6 +57,11 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
     i18n.changeLanguage(language)
   }, [])
   const [collapse, setCollapse] = useState(false)
+  const [user, setUser] = useState<TUser>(
+    JSON.parse(atob(token.split('.')[1])).id
+  )
+  console.log(user)
+
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
