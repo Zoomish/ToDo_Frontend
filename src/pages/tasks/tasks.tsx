@@ -2,10 +2,10 @@ import { Table } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import React, { FC, useContext } from 'react'
 import { ECountry, TDish } from '../../utils/typesFromBackend'
-import * as userAPI from '../../utils/api/user-api'
+import * as userAPI from '../../utils/api/task-api'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import imageNoPhoto from '../../assets/images/no_photo.png'
-import { BASE_URL_CDN } from '../../utils/const'
+import { BASE_URL } from '../../utils/const'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 
 interface InameTariffs {
@@ -20,16 +20,15 @@ interface IMenu {
   language: ECountry
 }
 
-const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
+const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
   const { openNotification } = useContext(NotificationContext)
 
   const [data, setData] = React.useState<TDish[]>([])
   const [, setnameTariffs] = React.useState<InameTariffs[]>([])
   const location = useLocation()
-
   React.useEffect(() => {
     userAPI
-      .getUsers(token)
+      .getTasks(token)
       .then((res) => {
         setData(res)
         const objectNames: { [key: string]: boolean } = {}
@@ -56,7 +55,7 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
       key: 'image',
       render: (image: string) => (
         <img
-          src={`${BASE_URL_CDN}/${image}`}
+          src={`${BASE_URL}/${image}`}
           style={{ width: '100px', height: '100px', objectFit: 'contain' }}
           onError={(e) => {
             e.currentTarget.src = imageNoPhoto
@@ -83,9 +82,7 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
       dataIndex: 'category.title',
       key: 'category.title',
       render: (roles, user) => (
-        <Link to={`/${pathRest}/category/:${user.id}`}>
-          {user.id}
-        </Link>
+        <Link to={`/${pathRest}/category/:${user.id}`}>{user.id}</Link>
       ),
       sorter: (a, b) => {
         if (a.id !== undefined && b.id !== undefined) {
@@ -94,16 +91,16 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
         return 0
       }
     }
-  // {
-  //  title: `${t('price')}`,
-  //  dataIndex: 'price',
-  //  key: 'price',
-  //  render: (price) => <p>{price}</p>,
-  //  sorter: (a, b) => a.price - b.price,
-  //  filters: [...nameTariffs],
-  //  onFilter: (value: string | number | boolean, record) =>
-  //    record.price === value
-  // }
+    // {
+    //  title: `${t('price')}`,
+    //  dataIndex: 'price',
+    //  key: 'price',
+    //  render: (price) => <p>{price}</p>,
+    //  sorter: (a, b) => a.price - b.price,
+    //  filters: [...nameTariffs],
+    //  onFilter: (value: string | number | boolean, record) =>
+    //    record.price === value
+    // }
   ]
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -143,4 +140,4 @@ const Dishes: FC<IMenu> = ({ token, pathRest, t }) => {
     </div>
   )
 }
-export default Dishes
+export default Tasks

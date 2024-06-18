@@ -51,10 +51,13 @@ const Sidebar: FC<ISidebar> = ({
       >
         {!collapse ? (
           <p>
-            <a href='https://github.com/Zoomish'>Zoomish</a> <span className='font-medium'>ToDo</span>
+            <a href='https://github.com/Zoomish'>Zoomish</a>{' '}
+            <span className='font-medium'>ToDo</span>
           </p>
         ) : (
-          <a className='font-medium' href='https://github.com/Zoomish'>Z</a>
+          <a className='font-medium' href='https://github.com/Zoomish'>
+            Z
+          </a>
         )}
       </div>
       <Menu

@@ -13,7 +13,9 @@ export const NotificationContext = createContext<NotificationContextProps>({
 interface INotificationProvider {
   children: ReactElement
 }
-export const NotificationProvider: FC<INotificationProvider> = ({ children }) => {
+export const NotificationProvider: FC<INotificationProvider> = ({
+  children
+}) => {
   const [api, contextHolder] = notification.useNotification()
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

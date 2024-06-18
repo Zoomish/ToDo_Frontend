@@ -5,47 +5,21 @@ export interface TButton {
 }
 
 export interface TUser {
-  _id: string
+  id: number
   nickname?: string
-  birthdate?: string
-  name?: string
-  phone: string
-  street?: string
-  house?: string
-  flat?: string
-  city?: TCity
-  smsCode?: string
-  timeSendCode?: string
+  tg_id?: number
+  tasks?: TTask[]
 }
-export interface TOrder {
-  _id: string
-  incomingOrderId: number
-  orderStatusId: string
-  check: boolean
-  numberTable?: string
+export interface TTask {
+  id: number
+  title: string
+  description: string
+  image: string
+  tags?: string
   spotId?: string
-  hide?: boolean
-  orderPrice: number
-  isPaid: boolean
-  datetime: string
-  comment: string
-  place?: number
-  delivery_detail?: {
-    city?: string
-    street?: string
-    house?: string
-    flat?: string
-  }
-  orderType_id: TOrderType | string
-  deliveryPrice?: number
-  payment_id: TPayment | string
-  user_id: TUser | string
-  userPhone: string
-  userCode?: string
-  rest_id: TRest | string
-  orderList: TCartInitialState
-  customInputs: TCustomInputsOrder[]
-  creation_date: string
+  progress: string
+  time: Date
+  notification: Date
 }
 export interface TCustomInputsOrder {
   name: string

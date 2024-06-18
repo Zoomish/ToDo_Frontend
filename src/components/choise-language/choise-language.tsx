@@ -3,11 +3,17 @@ import { ECountry } from '../../utils/typesFromBackend'
 import { Select } from 'antd'
 
 interface IChangeLanguage {
+  dark: boolean
   style: Object
   t: (arg0: string) => string
   changeLanguage: (lng: ECountry) => void
 }
-const ChoiseLanguage: FC<IChangeLanguage> = ({ t, style, changeLanguage }) => {
+const ChoiseLanguage: FC<IChangeLanguage> = ({
+  t,
+  dark,
+  style,
+  changeLanguage
+}) => {
   const [selectedOption, setSelectedOption] = React.useState('')
   const restData = Object.keys(ECountry)
   React.useEffect(() => {
@@ -34,11 +40,17 @@ const ChoiseLanguage: FC<IChangeLanguage> = ({ t, style, changeLanguage }) => {
         <Select
           style={style}
           id='my-select'
+          className={dark ? 'black' : 'white'}
           value={selectedOption || restData[0]}
           onChange={(e) => onFinish(e)}
         >
           {restData.map((country) => (
-            <Select.Option key={country} classname={'mb-1'} style={style} value={country}>
+            <Select.Option
+              key={country}
+              classname={'mb-1'}
+              style={style}
+              value={country}
+            >
               {country}
             </Select.Option>
           ))}
