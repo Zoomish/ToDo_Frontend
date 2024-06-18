@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import React, { useState, useEffect, FC } from 'react'
+import React, { useState, useEffect, FC, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { Layout } from 'antd'
@@ -21,6 +21,8 @@ import Admins from '../../pages/categories/categories'
 import AddAdmin from '../../pages/add-category/add-category'
 import Admin from '../../pages/category/category'
 import Dark from '../dark/dark'
+import { NotificationContext } from '../../components/notification-provider/notification-provider'
+import * as userAPI from '../../utils/api/user-api'
 import { Footer } from 'antd/es/layout/layout'
 
 const { Header, Sider, Content } = Layout
@@ -39,7 +41,10 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   const [dark, setDark] = useState<boolean>(
     localStorage.getItem('dark') === 'true' ?? false
   )
+  const [user, setUser] = useState<TUser>()
   const { t } = useTranslation()
+  const { openNotification } = useContext(NotificationContext)
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
   const changeLanguage = (lng: ECountry) => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -55,11 +60,14 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   React.useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     i18n.changeLanguage(language)
+    userAPI
+      .getUser(token, +JSON.parse(atob(token.split('.')[1])).id)
+      .then((res: TUser) => {
+        setUser(res)
+      })
+      .catch((e: any) => openNotification(e, 'topRight'))
   }, [])
   const [collapse, setCollapse] = useState(false)
-  const [user, setUser] = useState<TUser>(
-    JSON.parse(atob(token.split('.')[1])).id
-  )
   console.log(user)
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
