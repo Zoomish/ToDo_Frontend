@@ -67,8 +67,8 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
       title: `${t('name')}`,
       dataIndex: 'title',
       key: 'title',
-      render: (email, user) => (
-        <Link to={`/${pathRest}/dish/:${user.id}`}>{user.email}</Link>
+      render: (title: string) => (
+        <Link to={`/${pathRest}/dish/:${title}`}>{title}</Link>
       ),
       sorter: (a, b) => {
         if (a.email !== undefined && b.email !== undefined) {
@@ -78,9 +78,9 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
       }
     },
     {
-      title: `${t('category')}`,
-      dataIndex: 'category.title',
-      key: 'category.title',
+      title: `${t('description')}`,
+      dataIndex: 'description',
+      key: 'description',
       render: (roles, user) => (
         <Link to={`/${pathRest}/category/:${user.id}`}>{user.id}</Link>
       ),
@@ -90,17 +90,19 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
         }
         return 0
       }
+    },
+    {
+      title: `${t('price')}`,
+      dataIndex: 'progress',
+      key: 'progress',
+      render: (progress) => <p>{progress}</p>,
+      sorter: (a, b) => {
+        if (a.id !== undefined && b.id !== undefined) {
+          return a.id.localeCompare(b.id)
+        }
+        return 0
+      }
     }
-    // {
-    //  title: `${t('price')}`,
-    //  dataIndex: 'price',
-    //  key: 'price',
-    //  render: (price) => <p>{price}</p>,
-    //  sorter: (a, b) => a.price - b.price,
-    //  filters: [...nameTariffs],
-    //  onFilter: (value: string | number | boolean, record) =>
-    //    record.price === value
-    // }
   ]
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
