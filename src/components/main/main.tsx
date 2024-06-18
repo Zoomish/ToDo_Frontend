@@ -56,12 +56,11 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
     background: dark ? '#000' : '#fff',
     color: dark ? '#fff' : '#000'
   }
-
   React.useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     i18n.changeLanguage(language)
     userAPI
-      .getUser(token, +JSON.parse(atob(token.split('.')[1])).id)
+      .getUser(token, +'1')
       .then((res: TUser) => {
         setUser(res)
       })
