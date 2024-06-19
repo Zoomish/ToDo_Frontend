@@ -28,6 +28,9 @@ const App: FC = () => {
         <Route path={`/${pathRest}/autorization`} exact={true}>
           <Main token={token} pathRest={pathRest} setToken={setToken} />
         </Route>
+        <Route path={`/${pathRest}/registration`} exact={true}>
+          <Main token={token} pathRest={pathRest} setToken={setToken} />
+        </Route>
         <Route path={'/admin'} exact>
           <Redirect to={`/${pathRest}/autorization`} />
         </Route>
