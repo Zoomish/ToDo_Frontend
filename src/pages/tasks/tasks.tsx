@@ -19,7 +19,7 @@ interface IMenu {
 const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
   const { openNotification } = useContext(NotificationContext)
 
-  const { tg } = useTelegram
+  const { tg } = useTelegram()
   console.log(tg)
 
   const [data, setData] = React.useState<TTask[]>([])
