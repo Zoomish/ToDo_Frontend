@@ -2,7 +2,8 @@
   background: #fff;
 }
 
-:where(.css-dev-only-do-not-override-1ij74fp).ant-upload-wrapper .ant-upload-drag {
+:where(.css-dev-only-do-not-override-1ij74fp).ant-upload-wrapper
+  .ant-upload-drag {
   height: auto !important;
   margin-top: 1.5rem;
 }
@@ -18,6 +19,9 @@
   }
 }
 
-:where(.css-dev-only-do-not-override-1ij74fp).ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
+:where(.css-dev-only-do-not-override-1ij74fp).ant-menu-light:not(
+    .ant-menu-horizontal
+  )
+  .ant-menu-item:not(.ant-menu-item-selected):hover {
   background-color: #fff !important;
 }
