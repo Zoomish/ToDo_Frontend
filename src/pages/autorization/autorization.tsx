@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom'
 import * as autorizationApi from '../../utils/api/autorization-api'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import * as validateTokenApi from '../../utils/api/validate-token-api'
+import { useTelegram } from '../../services/hooks/use-telegram'
 
 interface IAutorization {
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>
@@ -16,6 +17,7 @@ interface IAutorization {
 
 const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
   const storedInitialRoute = localStorage.getItem('initialRoute')
+  const { tg } = useTelegram()
   const { openNotification } = useContext(NotificationContext)
   const history = useHistory()
   useEffect(() => {
@@ -87,6 +89,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
+      <p>{tg.initDataUnsafe.user.first_name}</p>
       <Form.Item
         label={t('login')}
         name='email'
