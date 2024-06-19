@@ -7,7 +7,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import imageNoPhoto from '../../assets/images/no_photo.png'
 import { BASE_URL } from '../../utils/const'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
-import { useTelegram } from '../../services/hooks/use-telegram'
 
 interface IMenu {
   token: string
@@ -18,10 +17,6 @@ interface IMenu {
 
 const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
   const { openNotification } = useContext(NotificationContext)
-
-  const { tg } = useTelegram()
-  console.log(tg)
-
   const [data, setData] = React.useState<TTask[]>([])
   const location = useLocation()
   React.useEffect(() => {
