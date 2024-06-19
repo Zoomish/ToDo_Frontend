@@ -22,6 +22,7 @@ import AddAdmin from '../../pages/add-category/add-category'
 import Admin from '../../pages/category/category'
 import Dark from '../dark/dark'
 import { Footer } from 'antd/es/layout/layout'
+import Registration from '../../pages/registration/registration'
 
 const { Header, Sider, Content } = Layout
 
@@ -155,7 +156,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
                   />
                 </Route>
                 <Route path={`/:${pathRest}/registration`}>
-                  <Autorization
+                  <Registration
                     setIsLoggedIn={setIsLoggedIn}
                     t={t}
                     setToken={setToken}
