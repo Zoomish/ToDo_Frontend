@@ -89,7 +89,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
-      <p>{tg.initDataUnsafe.user.first_name}</p>
+      <p>{tg?.initDataUnsafe?.user?.first_name ? tg.initDataUnsafe.user.first_name : ''}</p>
       <Form.Item
         label={t('login')}
         name='email'
