@@ -154,6 +154,13 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
                     setToken={setToken}
                   />
                 </Route>
+                <Route path={`/:${pathRest}/registration`}>
+                  <Autorization
+                    setIsLoggedIn={setIsLoggedIn}
+                    t={t}
+                    setToken={setToken}
+                  />
+                </Route>
                 <ProtectedRoute
                   path={`/:${pathRest}/categories`}
                   exact
