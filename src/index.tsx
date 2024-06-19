@@ -10,6 +10,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      <script src="https://telegram.org/js/telegram-web-app.js"></script>
     </BrowserRouter>
   </React.StrictMode>
 )
