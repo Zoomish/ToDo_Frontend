@@ -4,7 +4,7 @@
 import { Button, Form, Input } from 'antd'
 import { Dispatch, FC, SetStateAction, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import * as registrationApi from '../../utils/api/autorization-api'
+import * as registrationApi from '../../utils/api/registration-api'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import * as validateTokenApi from '../../utils/api/validate-token-api'
 
@@ -54,7 +54,7 @@ const Registration: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
   }, [])
   const onFinish = (values: any) => {
     registrationApi
-      .autorization(values)
+      .registration(values)
       .then((res) => {
         localStorage.setItem('token', res.token)
         setToken(res.token)
