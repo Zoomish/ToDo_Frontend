@@ -102,9 +102,9 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       >
         <Input.Password />
       </Form.Item>
-      <p>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Link to={'registration'}>{t('send')}</Link>
-      </p>
+      </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type='primary' htmlType='submit'>
           {t('send')}
