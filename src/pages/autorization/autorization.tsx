@@ -103,9 +103,9 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
         <Input.Password />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 7, span: 16 }}>
-        Don&apos;t have an account?{' '}
+        {t('dont-have-an-account')}?{' '}
         <Link to={'registration'} className='text-blue-500'>
-          Sign Up
+          {t('sign-up')}
         </Link>
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

@@ -248,5 +248,7 @@
   "logo": "Логотип",
   "сonfirm-password": "Құпия сөзді Растау",
   "password-do-not-match": "Құпия сөз сәйкес келмеді",
-  "menu-uploaded": "Мәзір сәтті импортталды"
+  "menu-uploaded": "Мәзір сәтті импортталды",
+  "dont-have-an-account": "Есептік жазбаңыз жоқ",
+  "sign-up": "Тіркелу"
 }

@@ -248,5 +248,7 @@
   "logo": "Логотип",
   "сonfirm-password": "Подтвердите пароль",
   "password-do-not-match": "Пароли не совпадают",
-  "menu-uploaded": "Меню успешно импортировано"
+  "menu-uploaded": "Меню успешно импортировано",
+  "dont-have-an-account": "Нет аккаунта",
+  "sign-up": "Зарегестрироваться"
 }
