@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, Form, Input } from 'antd'
 import { Dispatch, FC, SetStateAction, useContext, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import * as autorizationApi from '../../utils/api/autorization-api'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import * as validateTokenApi from '../../utils/api/validate-token-api'
@@ -102,6 +102,9 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       >
         <Input.Password />
       </Form.Item>
+      <p>
+        <Link to={'registration'}>{t('send')}</Link>
+      </p>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type='primary' htmlType='submit'>
           {t('send')}
