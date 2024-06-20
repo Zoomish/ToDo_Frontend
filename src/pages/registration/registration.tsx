@@ -82,6 +82,7 @@ const Registration: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
     <Form
       {...layout}
       name='basic'
+      className='flex justify-center'
       style={{ maxWidth: 600 }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
