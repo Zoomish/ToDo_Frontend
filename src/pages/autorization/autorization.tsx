@@ -82,7 +82,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
     <Form
       {...layout}
       name='basic'
-      style={{ maxWidth: 600 }}
+      className='max-w-[600px]'
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete='off'
@@ -102,8 +102,11 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       >
         <Input.Password />
       </Form.Item>
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Link to={'registration'}>{t('send')}</Link>
+      <Form.Item wrapperCol={{ offset: 7, span: 16 }}>
+        Don&apos;t have an account?{' '}
+        <Link to={'registration'} className='text-blue-500'>
+          Sign Up
+        </Link>
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type='primary' htmlType='submit'>
