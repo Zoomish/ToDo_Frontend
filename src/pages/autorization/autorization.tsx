@@ -82,7 +82,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
     <Form
       {...layout}
       name='basic'
-      className='max-w-[600px] flex justify-center'
+      className='max-w-[600px] flex justify-center flex-col'
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete='off'
