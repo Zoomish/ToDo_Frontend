@@ -95,7 +95,7 @@ const Registration: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
         <Input />
       </Form.Item>
       <Form.Item
-        label={t('login')}
+        label={t('email')}
         name='email'
         rules={[{ required: true, message: t('enter-your-username') }]}
       >

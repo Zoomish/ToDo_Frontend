@@ -88,7 +88,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       autoComplete='off'
     >
       <Form.Item
-        label={t('login')}
+        label={t('email')}
         name='email'
         rules={[{ required: true, message: t('enter-your-username') }]}
       >

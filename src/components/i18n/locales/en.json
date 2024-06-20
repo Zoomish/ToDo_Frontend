@@ -209,6 +209,7 @@
   "send": "Send",
   "password": "Password",
   "login": "Login",
+  "email": "Email",
   "isDelivery": "Is this a delivery?",
   "verify-client-old-18": "Do I need to verify that the client is over 18 years old?",
   "choise-language": "Select a language",
