@@ -63,7 +63,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
           history.push(storedInitialRoute)
           localStorage.removeItem('initialRoute')
         } else {
-          history.push(`${window.location.host}/dishes`)
+          history.push('dishes')
         }
       })
       .catch((e) => openNotification(e, 'topRight'))
