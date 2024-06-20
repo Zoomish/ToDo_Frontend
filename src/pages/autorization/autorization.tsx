@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Button, Form, Input } from 'antd'
 import { Dispatch, FC, SetStateAction, useContext, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import * as autorizationApi from '../../utils/api/autorization-api'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import * as validateTokenApi from '../../utils/api/validate-token-api'
@@ -63,7 +63,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
           history.push(storedInitialRoute)
           localStorage.removeItem('initialRoute')
         } else {
-          history.push(`${window.location.host}/dishes`)
+          history.push('dishes')
         }
       })
       .catch((e) => openNotification(e, 'topRight'))
@@ -82,13 +82,13 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
     <Form
       {...layout}
       name='basic'
-      style={{ maxWidth: 600 }}
+      className='max-w-[600px] flex justify-center flex-col'
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
       <Form.Item
-        label={t('login')}
+        label={t('email')}
         name='email'
         rules={[{ required: true, message: t('enter-your-username') }]}
       >
@@ -101,6 +101,12 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
         rules={[{ required: true, message: t('enter-your-password') }]}
       >
         <Input.Password />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
+        {t('dont-have-an-account')}?{' '}
+        <Link to={'registration'} className='text-blue-500'>
+          {t('sign-up')}
+        </Link>
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <Button type='primary' htmlType='submit'>

@@ -209,6 +209,7 @@
   "send": "Жіберу",
   "password": "Құпия сөз",
   "login": "Кіру",
+  "email": "Электрондық пошта",
   "isDelivery": "Бұл жеткізу ме?",
   "verify-client-old-18": "Клиенттің жасы 18 жастан асқанын тексеру керек пе?",
   "choise-language": "Тілді таңдаңыз",
@@ -247,5 +248,9 @@
   "logo": "Логотип",
   "сonfirm-password": "Құпия сөзді Растау",
   "password-do-not-match": "Құпия сөз сәйкес келмеді",
-  "menu-uploaded": "Мәзір сәтті импортталды"
+  "menu-uploaded": "Мәзір сәтті импортталды",
+  "dont-have-an-account": "Есептік жазбаңыз жоқ",
+  "already-have-an-account": "Тіркелгі бар",
+  "sign-in": "Кіру",
+  "sign-up": "Тіркелу"
 }

@@ -209,6 +209,7 @@
   "send": "Send",
   "password": "Password",
   "login": "Login",
+  "email": "Email",
   "isDelivery": "Is this a delivery?",
   "verify-client-old-18": "Do I need to verify that the client is over 18 years old?",
   "choise-language": "Select a language",
@@ -247,5 +248,9 @@
   "logo": "Logo",
   "сonfirm-password": "Confirm Password",
   "password-do-not-match": "Password mismatch",
-  "menu-uploaded": "Menu imported successfully"
+  "menu-uploaded": "Menu imported successfully",
+  "dont-have-an-account": "Don't have an account",
+  "already-have-an-account": "Already have an account",
+  "sign-in": "Sign in",
+  "sign-up": "Sign Up"
 }

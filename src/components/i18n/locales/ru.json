@@ -209,6 +209,7 @@
   "send": "Отправить",
   "password": "Пароль",
   "login": "Логин",
+  "email": "Почта",
   "isDelivery": "Это доставка?",
   "verify-client-old-18": "Нужна ли проверка, что возраст клиента больше 18 лет?",
   "choise-language": "Выберите язык",
@@ -247,5 +248,9 @@
   "logo": "Логотип",
   "сonfirm-password": "Подтвердите пароль",
   "password-do-not-match": "Пароли не совпадают",
-  "menu-uploaded": "Меню успешно импортировано"
+  "menu-uploaded": "Меню успешно импортировано",
+  "dont-have-an-account": " Пока нет аккаунта",
+  "already-have-an-account": "Уже есть аккаунт",
+  "sign-in": "Войти",
+  "sign-up": "Зарегестрироваться"
 }
