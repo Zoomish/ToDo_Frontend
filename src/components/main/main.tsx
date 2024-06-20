@@ -40,6 +40,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   const [dark, setDark] = useState<boolean>(
     localStorage.getItem('dark') === 'true' ?? false
   )
+  const [width, setWidth] = useState<boolean>(false)
   const { t } = useTranslation()
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
@@ -58,18 +59,39 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
     i18n.changeLanguage(language)
   }, [])
   const [collapse, setCollapse] = useState(false)
+  let flag = false
+  if (typeof window !== 'undefined') {
+    window.addEventListener('resize', function resizeHandler() {
+      if (window.innerWidth < 768 && !flag) {
+        setCollapse(true)
+        setWidth(true)
+        flag = true
+      } else if (window.innerWidth >= 768 && flag) {
+        setCollapse(false)
+        setWidth(false)
+        flag = false
+      }
+    })
+  }
+  useEffect(() => {
+    setDark(localStorage.getItem('dark') === 'true')
+    window.innerWidth <= 768 ? setCollapse(true) : setCollapse(false)
+    window.innerWidth <= 768 ? setWidth(true) : setWidth(false)
+  }, [])
+
+  const handleToggle = (event: any): void => {
+    event.preventDefault()
+    if (!width) {
+      setCollapse(!collapse)
+      localStorage.setItem('collapse', JSON.stringify(collapse))
+    }
+  }
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     window.innerWidth <= 760 ? setCollapse(true) : setCollapse(false)
   }, [])
-
-  const handleToggle = (event: any): void => {
-    event.preventDefault()
-    setCollapse(!collapse)
-    localStorage.setItem('collapse', JSON.stringify(collapse))
-  }
 
   function handleClickFullScreen(): void {
     if (document.fullscreenElement != null) {
