@@ -250,5 +250,7 @@
   "password-do-not-match": "Құпия сөз сәйкес келмеді",
   "menu-uploaded": "Мәзір сәтті импортталды",
   "dont-have-an-account": "Есептік жазбаңыз жоқ",
+  "already-have-an-account": "Тіркелгі бар",
+  "sign-in": "Кіру",
   "sign-up": "Тіркелу"
 }

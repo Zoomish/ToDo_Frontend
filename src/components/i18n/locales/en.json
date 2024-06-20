@@ -250,5 +250,7 @@
   "password-do-not-match": "Password mismatch",
   "menu-uploaded": "Menu imported successfully",
   "dont-have-an-account": "Don't have an account",
+  "already-have-an-account": "Already have an account",
+  "sign-in": "Sign in",
   "sign-up": "Sign Up"
 }
