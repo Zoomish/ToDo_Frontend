@@ -7,7 +7,9 @@ import { handleResponse } from '../helpers'
 const { tg } = useTelegram()
 
 export const registration = async (button: any) => {
-  tg.sendData(JSON.stringify(button))
+  tg.sendData(
+    JSON.stringify(Object.assign({ operation: 'registration' }, button))
+  )
 
   return await fetch(`${BASE_URL}/auth/register`, {
     method: 'POST',
