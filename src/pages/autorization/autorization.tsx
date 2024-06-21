@@ -7,7 +7,6 @@ import { Link, useHistory } from 'react-router-dom'
 import * as autorizationApi from '../../utils/api/autorization-api'
 import { NotificationContext } from '../../components/notification-provider/notification-provider'
 import * as validateTokenApi from '../../utils/api/validate-token-api'
-import { useTelegram } from '../../services/hooks/use-telegram'
 
 interface IAutorization {
   setIsLoggedIn: Dispatch<SetStateAction<boolean>>
@@ -19,8 +18,6 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
   const storedInitialRoute = localStorage.getItem('initialRoute')
   const { openNotification } = useContext(NotificationContext)
   const history = useHistory()
-  const { tg } = useTelegram()
-
   useEffect(() => {
     const tokenDetailsString = localStorage.getItem('token')
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
@@ -66,9 +63,6 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
           history.push(storedInitialRoute)
           localStorage.removeItem('initialRoute')
         } else {
-          tg.sendData(
-            JSON.stringify(Object.assign({ operation: 'autorization' }, values))
-          )
           history.push('dishes')
         }
       })
