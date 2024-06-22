@@ -7,11 +7,7 @@ import { handleResponse } from '../helpers'
 const { tg } = useTelegram()
 
 export const autorization = async (button: any) => {
-  tg.sendData(
-    JSON.stringify(Object.assign({ operation: 'autorization' }, button))
-  )
-
-  return await fetch(`${BASE_URL}/auth/login`, {
+  await fetch(`${BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -20,4 +16,8 @@ export const autorization = async (button: any) => {
       ...button
     })
   }).then(async (res) => await handleResponse(res))
+
+  return tg.sendData(
+    JSON.stringify(Object.assign({ operation: 'autorization' }, button))
+  )
 }
