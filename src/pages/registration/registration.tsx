@@ -93,13 +93,12 @@ const Registration: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
       onFinishFailed={onFinishFailed}
       autoComplete='off'
     >
-      <p>{JSON.stringify(tg)}</p>
       <Form.Item
         label={t('login')}
         name='nickname'
         rules={[{ required: true, message: t('enter-your-username') }]}
       >
-        <Input defaultValue={tg.username ? tg.username : ''} />
+        <Input defaultValue={tg.initDataUnsafe.user.username ? tg.initDataUnsafe.user.username : ''} />
       </Form.Item>
       <Form.Item
         label={t('email')}
