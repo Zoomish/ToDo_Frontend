@@ -37,9 +37,7 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   // change to TRest
   const { tg } = useTelegram()
   const [language, setLanguage] = useState<ECountry>(
-    (localStorage.getItem('language') as ECountry) ??
-      tg.initDataUnsafe.user.language_code ??
-      ECountry.RU
+    (localStorage.getItem('language') as ECountry) ?? ECountry.RU
   )
   const [dark, setDark] = useState<boolean>(
     localStorage.getItem('dark') === 'true' ?? false
@@ -60,7 +58,11 @@ const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   }
   React.useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    i18n.changeLanguage(language)
+    i18n.changeLanguage(
+      tg?.initDataUnsafe?.user?.language_code
+        ? tg.initDataUnsafe.user.language_code
+        : language
+    )
   }, [])
   const [collapse, setCollapse] = useState(false)
   let flag = false

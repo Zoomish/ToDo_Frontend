@@ -98,7 +98,7 @@ const Registration: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
         name='nickname'
         rules={[{ required: true, message: t('enter-your-username') }]}
       >
-        <Input defaultValue={tg.initDataUnsafe.user.username ? tg.initDataUnsafe.user.username : ''} />
+        <Input defaultValue={tg?.initDataUnsafe?.user?.username ? tg.initDataUnsafe.user.username : ''} />
       </Form.Item>
       <Form.Item
         label={t('email')}
