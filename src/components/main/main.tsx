@@ -23,6 +23,7 @@ import Admin from '../../pages/category/category'
 import Dark from '../dark/dark'
 import { Footer } from 'antd/es/layout/layout'
 import Registration from '../../pages/registration/registration'
+import { useTelegram } from '../../services/hooks/use-telegram'
 
 const { Header, Sider, Content } = Layout
 
@@ -34,8 +35,11 @@ interface IMain {
 
 const Main: FC<IMain> = ({ token, pathRest, setToken }) => {
   // change to TRest
+  const { tg } = useTelegram()
   const [language, setLanguage] = useState<ECountry>(
-    (localStorage.getItem('language') as ECountry) ?? ECountry.RU
+    (localStorage.getItem('language') as ECountry) ??
+      tg.initDataUnsafe.user.language_code ??
+      ECountry.RU
   )
   const [dark, setDark] = useState<boolean>(
     localStorage.getItem('dark') === 'true' ?? false
