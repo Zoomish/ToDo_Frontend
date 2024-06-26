@@ -57,6 +57,7 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
             })
           )
           openNotification(e, 'topRight')
+          location.reload()
         })
     }
   }, [])
