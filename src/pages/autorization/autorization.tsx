@@ -50,6 +50,12 @@ const Autorization: FC<IAutorization> = ({ setIsLoggedIn, t, setToken }) => {
           }
         })
         .catch((e) => {
+          tg.sendData(
+            JSON.stringify({
+              operation: 'badtoken',
+              tg_id: tg.initDataUnsafe.user.id
+            })
+          )
           openNotification(e, 'topRight')
         })
     }
