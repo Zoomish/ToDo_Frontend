@@ -12,12 +12,10 @@ export const handleResponse = async (response: Response) => {
   else if (response.status === 401) {
     localStorage.removeItem('token')
     tg.sendData(
-      JSON.stringify(
-        Object.assign({
-          operation: 'badtoken',
-          tg_id: tg.initDataUnsafe.user.id
-        })
-      )
+      JSON.stringify({
+        operation: 'badtoken',
+        tg_id: tg.initDataUnsafe.user.id
+      })
     )
     location.reload()
   } else return await Promise.reject(response.status)
