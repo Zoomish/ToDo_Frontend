@@ -8,5 +8,6 @@ export const handleResponse = async (response: Response) => {
   else if (response.status === 401) {
     localStorage.removeItem('token')
     location.reload()
+    return await Promise.reject(response.status)
   } else return await Promise.reject(response.status)
 }
