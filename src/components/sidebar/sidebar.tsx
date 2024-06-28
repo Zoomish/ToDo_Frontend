@@ -66,14 +66,16 @@ const Sidebar: FC<ISidebar> = ({
         style={{ textAlign: 'left', ...style }}
         defaultSelectedKeys={['1']}
       >
-        <Menu.Item key='1' onClick={handleDishesClick}>
-          <ContainerOutlined />
-          <span>{t('dishes')}</span>
-        </Menu.Item>
-        <Menu.Item key='2' onClick={handleCategoriesClick}>
-          <GroupOutlined />
-          <span>{t('categories')}</span>
-        </Menu.Item>
+        <Menu.SubMenu title={t('dishes')} icon={<ContainerOutlined />}>
+          <Menu.Item key='1' onClick={handleDishesClick}>
+            <ContainerOutlined />
+            <span>{t('dishes')}</span>
+          </Menu.Item>
+          <Menu.Item key='2' onClick={handleCategoriesClick}>
+            <GroupOutlined />
+            <span>{t('categories')}</span>
+          </Menu.Item>
+        </Menu.SubMenu>
         <Menu.Item key='3' onClick={handleInstructionClick}>
           <InfoCircleOutlined />
           <span>{t('manual')}</span>
