@@ -5,7 +5,8 @@ import {
   LogoutOutlined,
   ContainerOutlined,
   GroupOutlined,
-  VerticalAlignTopOutlined
+  VerticalAlignTopOutlined,
+  UnorderedListOutlined
 } from '@ant-design/icons'
 import { useHistory } from 'react-router'
 
@@ -66,10 +67,10 @@ const Sidebar: FC<ISidebar> = ({
         style={{ textAlign: 'left', ...style }}
         defaultSelectedKeys={['1']}
       >
-        <Menu.SubMenu title={t('dishes')} icon={<ContainerOutlined />}>
+        <Menu.SubMenu title={t('tasks')} icon={<UnorderedListOutlined />}>
           <Menu.Item key='1' onClick={handleDishesClick}>
             <ContainerOutlined />
-            <span>{t('dishes')}</span>
+            <span>{t('tasks')}</span>
           </Menu.Item>
           <Menu.Item key='2' onClick={handleCategoriesClick}>
             <GroupOutlined />

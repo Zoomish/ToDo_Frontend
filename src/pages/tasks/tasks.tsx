@@ -98,8 +98,8 @@ const Tasks: FC<IMenu> = ({ token, pathRest, t }) => {
         }}
       >
         <div style={{ display: 'block', marginRight: 'auto' }}>
-          <h2 style={{ fontWeight: 600, marginBottom: '0' }}>{t('dishes')}</h2>
-          <p style={{ marginBottom: '0' }}>{t('your-list-of-dishes')}</p>
+          <h2 style={{ fontWeight: 600, marginBottom: '0' }}>{t('tasks')}</h2>
+          <p style={{ marginBottom: '0' }}>{t('your-list-of-tasks')}</p>
         </div>
         <NavLink
           to={`/${pathRest}/add/dish`}
